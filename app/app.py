@@ -47,7 +47,8 @@ def tracking_command():
 #вывод видео с помощью ffmpeg
 def uploaded_file():
     os.chdir("/Users/wasd64/Desktop/Code/VVIT/DeepSort/")
-    os.system("ffmpeg  -i Yolov5_DeepSort_OSNet/weights/best_osnet_x0_25/your_video.mp4 | ffplay -i Yolov5_DeepSort_OSNet/static/your_video.mp4")
+    os.system("mv Yolov5_DeepSort_OSNet/weights/best_osnet_x0_25/your_video.mp4 Yolov5_DeepSort_OSNet/static/")
+    os.system("ffplay -i Yolov5_DeepSort_OSNet/static/your_video.mp4")
 
 #Декоратор с выводом потока из uploaded_file
 @app.route('/video_feed')
