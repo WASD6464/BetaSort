@@ -2,7 +2,6 @@ import os
 from flask import Flask, request, redirect, url_for, render_template, Response
 from werkzeug.utils import secure_filename
 from time import sleep
-from ffpyplayer.player import MediaPlayer
 import time
 
 
@@ -45,20 +44,10 @@ def tracking_command():
 
 
 
-#вывод видео с помощью ffpyplayer
+#вывод видео с помощью ffmpeg
 def uploaded_file():
-    print(os.getcwd())
-    player = MediaPlayer('/Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/weights/best_osnet_x0_25/your_video.mp4')
-    val = ''
-    while val != 'eof':
-        frame, val = player.get_frame()
-        if val != 'eof' and frame is not None:
-            img, t = frame
-
-
-@app.route('/outvid')
-def video_out():
-    return render_template('outvid.html')
+    os.chdir("/Users/wasd64/Desktop/Code/VVIT/DeepSort/")
+    os.system("ffmpeg  -i Yolov5_DeepSort_OSNet/weights/best_osnet_x0_25/your_video.mp4 | ffplay -i Yolov5_DeepSort_OSNet/static/your_video.mp4")
 
 #Декоратор с выводом потока из uploaded_file
 @app.route('/video_feed')
