@@ -9,6 +9,7 @@ UPLOAD_FOLDER = '/Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp4'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+os.chdir("/Users/wasd64/Desktop/Code/VVIT/DeepSort/")
 
 
 #Разрешённые типы файлов из ALLOWED_EXTENSIONS
@@ -46,9 +47,8 @@ def tracking_command():
 
 #вывод видео с помощью ffmpeg
 def uploaded_file():
-    os.chdir("/Users/wasd64/Desktop/Code/VVIT/DeepSort/")
-    os.system("mv Yolov5_DeepSort_OSNet/weights/best_osnet_x0_25/your_video.mp4 Yolov5_DeepSort_OSNet/static/")
-    os.system("ffplay -i Yolov5_DeepSort_OSNet/static/your_video.mp4")
+    os.system("mv weights/best_osnet_x0_25/your_video.mp4 static/")
+    os.system("ffplay -i static/your_video.mp4")
 
 #Декоратор с выводом потока из uploaded_file
 @app.route('/video_feed')
@@ -59,7 +59,8 @@ def video_feed():
 #Декоратор с шаблоном videopl.html
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    text = open("/Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/weights/best_osnet_x0_25/tracks/your_video").read()
+    os.system("mv weights/best_osnet_x0_25/tracks/your_video static/")
+    text = open("static/your_video").read()
     return render_template('videopl.html',text=text)
 
 

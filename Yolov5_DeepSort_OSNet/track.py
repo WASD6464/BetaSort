@@ -49,7 +49,10 @@ ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 def detect(opt):
     # cursor.execute('truncate table "public.detect";')
     # conn.commit()
-    os.remove("weights/best_osnet_x0_25/tracks/your_video")
+    if os.path.exists("static/your_video.mp4"):
+        os.remove("static/your_video.mp4")
+    if os.path.exists("weights/best_osnet_x0_25/tracks/your_video"):
+        os.remove("weights/best_osnet_x0_25/tracks/your_video")
     out, source, yolo_model, deep_sort_model, show_vid, save_vid, save_txt, imgsz, evaluate, half, \
         project, exist_ok, update, save_crop = \
         opt.output, opt.source, opt.yolo_model, opt.deep_sort_model, opt.show_vid, opt.save_vid, \
