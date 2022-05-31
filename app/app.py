@@ -5,11 +5,10 @@ from time import sleep
 import time
 
 
-UPLOAD_FOLDER = '/Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/download_vid/'
+UPLOAD_FOLDER = 'upload/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp4'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-os.chdir("/Users/wasd64/Desktop/Code/VVIT/DeepSort/")
 
 
 #Разрешённые типы файлов из ALLOWED_EXTENSIONS
@@ -37,18 +36,20 @@ def tracking_file():
 
 
 #Декоратор с запуском трекинга через терминал
+# @app.route('/tracking_command/', methods=['GET'])
+# def tracking_command():
+#     os.chdir("Yolov5_DeepSort_OSNet/")
+#     os.system("python track.py --source /Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/download_vid/your_video.mp4 --project /Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/ --save-txt --save-vid --yolo_model /Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/weights/best.pt --exist-ok")
+#     return redirect(url_for("index"))
+
 @app.route('/tracking_command/', methods=['GET'])
 def tracking_command():
-    os.chdir("Yolov5_DeepSort_OSNet/")
-    os.system("python track.py --source /Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/download_vid/your_video.mp4 --project /Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/ --save-txt --save-vid --yolo_model /Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/weights/best.pt --exist-ok")
     return redirect(url_for("index"))
-
 
 
 #вывод видео с помощью ffmpeg
 def uploaded_file():
-    os.system("mv weights/best_osnet_x0_25/your_video.mp4 static/")
-    os.system("ffplay -i static/your_video.mp4")
+    os.system("ffplay -i complete/your_video.mp4")
 
 #Декоратор с выводом потока из uploaded_file
 @app.route('/video_feed')
@@ -59,10 +60,9 @@ def video_feed():
 #Декоратор с шаблоном videopl.html
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    os.system("mv weights/best_osnet_x0_25/tracks/your_video static/")
-    text = open("static/your_video").read()
+    text = open("complete/your_video").read()
     return render_template('videopl.html',text=text)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)

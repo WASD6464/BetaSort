@@ -1,4 +1,3 @@
-# limit the number of cpus used by high performance libraries
 import os
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["OPENBLAS_NUM_THREADS"] = "1"
@@ -19,7 +18,6 @@ import numpy as np
 import cv2
 import torch
 import torch.backends.cudnn as cudnn
-import psycopg2
 
 from yolov5.models.experimental import attempt_load
 from yolov5.utils.downloads import attempt_download
@@ -39,20 +37,11 @@ if str(ROOT) not in sys.path:
 ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
 
-
-# conn = psycopg2.connect(dbname='postgres', user='alex',
-#                         password='1234', host='localhost')
-# cursor = conn.cursor()
-# #cursor.execute('DELETE FROM shema1.table1')
-
-
 def detect(opt):
-    # cursor.execute('truncate table "public.detect";')
-    # conn.commit()
     if os.path.exists("static/your_video.mp4"):
-        os.remove("static/your_video.mp4")
-    if os.path.exists("weights/best_osnet_x0_25/tracks/your_video"):
-        os.remove("weights/best_osnet_x0_25/tracks/your_video")
+        os.system("rm static/your_video.mp4")
+    if os.path.exists("static/your_video"):
+        os.system("rm static/your_video")
     out, source, yolo_model, deep_sort_model, show_vid, save_vid, save_txt, imgsz, evaluate, half, \
         project, exist_ok, update, save_crop = \
         opt.output, opt.source, opt.yolo_model, opt.deep_sort_model, opt.show_vid, opt.save_vid, \
@@ -216,11 +205,9 @@ def detect(opt):
                             bbox_w = output[2] - output[0]
                             bbox_h = output[3] - output[1]
                             # Write MOT compliant results to file
-                            with open(txt_path, 'a') as f:
-                                f.write(str(frame_idx) + "    " + str(id) + "    " + str(bbox_left) + "    " + str(bbox_top) + "    " + str(bbox_w) + "    " + str(bbox_h) + "\n")
-                                # cursor.execute('INSERT INTO "public.detect" (frame_idx, id, bbox_left, bbox_top, bbox_w, bbox_h) VALUES (%s, %s, %s, %s, %s, %s);',
-                    # (frame_idx, id.item(), bbox_left.item(), bbox_top.item(), bbox_w.item(), bbox_h.item()))
-                                # conn.commit()
+                            with open(txt_path + '.txt', 'a') as f:
+                                f.write(('%g ' * 10 + '\n') % (frame_idx + 1, id, bbox_left,  # MOT format
+                                                               bbox_top, bbox_w, bbox_h, -1, -1, -1, i))
 
                         if save_vid or save_crop or show_vid:  # Add bbox to image
                             c = int(cls)  # integer class

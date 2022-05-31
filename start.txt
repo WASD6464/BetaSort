@@ -1,1 +1,0 @@
-python track.py --yolo_model weights/best.pt --source download_vid/123.mp4 --save-vid
