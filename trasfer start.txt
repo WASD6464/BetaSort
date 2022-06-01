@@ -1,2 +1,2 @@
-cd /Users/wasd64/Desktop/Code/VVIT/DeepSort/static/Upload/
+cd static/Upload/
 python transfer.py
