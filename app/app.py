@@ -35,33 +35,16 @@ def tracking_file():
     return render_template('track.html')
 
 
-#Декоратор с запуском трекинга через терминал
-# @app.route('/tracking_command/', methods=['GET'])
-# def tracking_command():
-#     os.chdir("Yolov5_DeepSort_OSNet/")
-#     os.system("python track.py --source /Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/download_vid/your_video.mp4 --project /Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/ --save-txt --save-vid --yolo_model /Users/wasd64/Desktop/Code/VVIT/DeepSort/Yolov5_DeepSort_OSNet/weights/best.pt --exist-ok")
-#     return redirect(url_for("index"))
-
 @app.route('/tracking_command/', methods=['GET'])
 def tracking_command():
     return redirect(url_for("index"))
 
 
-#вывод видео с помощью ffmpeg
-def uploaded_file():
-    os.system("ffplay -i complete/your_video.mp4")
-
-#Декоратор с выводом потока из uploaded_file
-@app.route('/video_feed')
-def video_feed():
-    return Response(uploaded_file(), mimetype='video/mp4')
-
-
 #Декоратор с шаблоном videopl.html
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    text = open("complete/your_video").read()
-    return render_template('videopl.html',text=text)
+    text = open("static/your_video.txt").read()
+    return render_template('videopl.html', text=text)
 
 
 if __name__ == "__main__":

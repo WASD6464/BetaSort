@@ -1,11 +1,16 @@
 import os
 
+flag=True
 while True:
-    if os.path.exists("download/your_video.mp4"):
-        os.system("mv download/your_video.mp4 toDO/")
-        os.system(
-            "python track.py --source toDO/your_video.mp4 --project / --save-txt --save-vid --yolo_model weights/best.pt --exist-ok")
-    if os.path.exists("weights/best_osnet_x0_25/your_video.mp4"):
-        os.system("mv weights/best_osnet_x0_25/your_video.mp4 static/")
-    if os.path.exists("weights/best_osnet_x0_25/tracks/your_video"):
-        os.system("mv weights/best_osnet_x0_25/tracks/your_video static/")
+    while flag:
+        if os.path.exists("static/Upload/your_video.mp4"):
+            flag=False
+            os.system("mv static/Upload/your_video.mp4 toDO/")
+            os.system("rm static/Upload/your_video.mp4")
+            os.system(
+                "python track.py --source toDO/your_video.mp4 --save-txt --save-vid --yolo_model weights/best.pt --exist-ok")
+    if os.path.exists("runs/track/weights/best_osnet_x0_25/your_video.mp4"):
+        os.system("mv runs/track/weights/best_osnet_x0_25/your_video.mp4 static/Complete")
+    if os.path.exists("runs/track/weights/best_osnet_x0_25/tracks/your_video.txt"):
+        os.system("mv runs/track/weights/best_osnet_x0_25/tracks/your_video.txt static/Complete")
+    flag=True

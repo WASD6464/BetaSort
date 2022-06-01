@@ -1,3 +1,0 @@
-Yolov5: docker run --rm --name deep -v /Users/wasd64/Desktop/Code/VVIT/DeepSort/static/Upload:/Users/wasd64/Desktop/Code/VVIT/DeepSort/download -v /Users/wasd64/Desktop/Code/VVIT/DeepSort/static/Complete:/Users/wasd64/Desktop/Code/VVIT/DeepSort/static deepsort
-App: docker run docker run --rm --name cite -p 8080:8080 -v /Users/wasd64/Desktop/Code/VVIT/DeepSort/static/Upload:/Users/wasd64/Desktop/Code/VVIT/DeepSort/upload -v /Users/wasd64/Desktop/Code/VVIT/DeepSort/static/Complete:/Users/wasd64/Desktop/Code/VVIT/DeepSort/complete app
-BD: 
