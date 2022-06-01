@@ -1,2 +1,2 @@
 cd static/Upload/
-python transfer.py
+python transfer.py  
