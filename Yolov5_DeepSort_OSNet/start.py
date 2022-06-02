@@ -2,6 +2,7 @@ import os
 
 while True:
     if os.path.exists("static/Upload/your_video.mp4"):
+            os.system("rm -f toDO/*")
             os.system("mv static/Upload/your_video.mp4 toDO/")
             os.system("rm static/Upload/your_video.mp4")
             os.system(

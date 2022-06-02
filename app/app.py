@@ -37,12 +37,16 @@ def tracking_file():
 
 @app.route('/tracking_command/', methods=['GET'])
 def tracking_command():
+    while not(os.path.exists("/Users/wasd64/Desktop/Code/VVIT/DeepSort/static/your_video.mp4")):
+        time.sleep(0.1)
     return redirect(url_for("index"))
 
 
 #Декоратор с шаблоном videopl.html
 @app.route('/index', methods=['GET', 'POST'])
 def index():
+    while not(os.path.exists("/Users/wasd64/Desktop/Code/VVIT/DeepSort/static/your_video.txt")):
+        time.sleep(1)
     text = open("static/your_video.txt").read()
     return render_template('videopl.html', text=text)
 
