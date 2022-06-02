@@ -22,10 +22,13 @@
 
 2. Создать образы app и Yolov5:
 
-`cd app`, `docker build -t app .`, `cd ..`, `cd Yolov5_DeepSort_OSNet`, `docker build -t deepsort .`
+`cd app`, `docker build -t app .`, `cd ..`, `cd Yolov5_DeepSort_OSNet`, `docker build -t deepsort .`, важно именно так назвать образы для работы
 
-3. Поочерёдно написать комманды из `app_start.txt`, `conventer start.txt`, `trasfer start.txt`, `autobd.txt` в разные терминалы
+3. Поочерёдно написать комманды из `info.txt` в разные терминалы
+
 4. Зайти на `127.0.0.1:8080`
+
+В файле commands.txt находится пример команд для запуска докера, в зависимости от ваших папок нужно изменить путь volume у docker
 
 ## Weights
 

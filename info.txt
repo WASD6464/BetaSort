@@ -1,0 +1,18 @@
+app run:
+
+docker run --rm --name cite -p 8080:8080 -v /Users/wasd64/Desktop/Code/VVIT/DeepSort/static/Upload:/Users/wasd64/Desktop/Code/VVIT/DeepSort/upload -v /Users/wasd64/Desktop/Code/VVIT/DeepSort/static/Complete:/Users/wasd64/Desktop/Code/VVIT/DeepSort/static app
+
+transfer run:
+
+cd static/Upload/
+python transfer.py
+
+converter run:
+
+cd static
+python converter.py
+
+autobd run:
+
+cd /Users/wasd64/Desktop/Code/VVIT/DeepSort/database/
+python autobd.py

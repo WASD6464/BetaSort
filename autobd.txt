@@ -1,2 +1,0 @@
-cd /Users/wasd64/Desktop/Code/VVIT/DeepSort/database/
-python autobd.py
