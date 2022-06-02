@@ -251,7 +251,6 @@ def detect(opt):
         LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
     if update:
         strip_optimizer(yolo_model)  # update model (to fix SourceChangeWarning)
-    return
 
 
 if __name__ == '__main__':
