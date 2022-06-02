@@ -40,9 +40,9 @@ ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
 def detect(opt):
     if os.path.exists("static/Complete/your_video.mp4"):
-        os.system("rm static/your_vide0.mp4")
+        os.system("rm static/your_video.mp4")
     if os.path.exists("static/Complete/your_video"):
-        os.system("rm static/your_vide0")
+        os.system("rm static/your_video")
     out, source, yolo_model, deep_sort_model, show_vid, save_vid, save_txt, imgsz, evaluate, half, \
         project, exist_ok, update, save_crop = \
         opt.output, opt.source, opt.yolo_model, opt.deep_sort_model, opt.show_vid, opt.save_vid, \

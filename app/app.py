@@ -25,6 +25,8 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], "your_video.mp4"))#Все загруженные видео будут называться your_video.mp4
+            os.system("rm static/your_video.mp4")
+            os.system("rm static/your_video.txt")
             return redirect('/track')
     return render_template('upload.html')
 
@@ -38,7 +40,7 @@ def tracking_file():
 @app.route('/tracking_command/', methods=['GET'])
 def tracking_command():
     while not(os.path.exists("/Users/wasd64/Desktop/Code/VVIT/DeepSort/static/your_video.mp4")):
-        time.sleep(0.1)
+        time.sleep(1)
     return redirect(url_for("index"))
 
 
