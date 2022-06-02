@@ -4,7 +4,6 @@ while True:
     if os.path.exists("static/Upload/your_video.mp4"):
             os.system("rm -f toDO/*")
             os.system("mv static/Upload/your_video.mp4 toDO/")
-            os.system("rm static/Upload/your_video.mp4")
             os.system(
                 "python track.py --source toDO/your_video.mp4 --save-txt --save-vid --yolo_model weights/best.pt --exist-ok")
     if os.path.exists("runs/track/weights/best_osnet_x0_25/your_video.mp4"):
