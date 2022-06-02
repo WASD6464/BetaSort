@@ -4,6 +4,7 @@
 
 1. Docker
 2. PostgreSQL
+3. FFmpeg
 
 ## How to Install
 
