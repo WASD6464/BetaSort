@@ -1,8 +1,8 @@
 import psycopg2
 
 conn = psycopg2.connect(dbname='postgres', user='wasd64',
-                            password='', host='localhost')
-cursor = conn.cursor()                            
+                        password='', host='localhost')
+cursor = conn.cursor()
 
 
 cursor.execute(f'CREATE TABLE public.detect\

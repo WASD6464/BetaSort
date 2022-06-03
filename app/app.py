@@ -11,27 +11,29 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-#Разрешённые типы файлов из ALLOWED_EXTENSIONS
+# Разрешённые типы файлов из ALLOWED_EXTENSIONS
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
-#Главная страница для скачивания файла
+# Главная страница для скачивания файла
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], "your_video.mp4"))#Все загруженные видео будут называться your_video.mp4
+            # Все загруженные видео будут называться your_video.mp4
+            file.save(os.path.join(
+                app.config['UPLOAD_FOLDER'], "your_video.mp4"))
             os.system("rm static/your_video.mp4")
             os.system("rm static/your_video.txt")
             return redirect('/track')
     return render_template('upload.html')
 
 
-#Декоратор с шаблоном track.html
+# Декоратор с шаблоном track.html
 @app.route('/track', methods=['GET', 'POST'])
 def tracking_file():
     return render_template('track.html')
@@ -44,7 +46,7 @@ def tracking_command():
     return redirect(url_for("index"))
 
 
-#Декоратор с шаблоном videopl.html
+# Декоратор с шаблоном videopl.html
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     while not(os.path.exists("/Users/wasd64/Desktop/Code/VVIT/DeepSort/static/your_video.txt")):
