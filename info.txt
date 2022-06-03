@@ -14,5 +14,5 @@ python converter.py
 
 autobd run:
 
-cd /Users/wasd64/Desktop/Code/VVIT/DeepSort/database/
+cd database
 python autobd.py
